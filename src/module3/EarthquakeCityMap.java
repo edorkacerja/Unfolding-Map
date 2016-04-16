@@ -85,14 +85,18 @@ public class EarthquakeCityMap extends PApplet {
 		    	float mag = Float.parseFloat(magObj.toString());
 		    	// PointFeatures also have a getLocation method
 		    	
-		    	int myColor = color(100,200,100);
+		    	int myColor;
+		    	int myRadius;
 		    	
 		    	if(mag < 4.0){
 		    		myColor = color(0,0,255);
+		    		myRadius = 5;
 		    	}else if(mag < 5.0){
 		    		myColor = color(255, 255, 0);
+		    		myRadius = 8;
 		    	}else {
 		    		myColor = color(255,0,0);
+		    		myRadius = 12;
 		    	}
 		    	
 		    	
@@ -100,6 +104,7 @@ public class EarthquakeCityMap extends PApplet {
 		    	
 		    	SimplePointMarker myTempMarker = createMarker(earthquake);
 		    	myTempMarker.setColor(myColor);
+		    	myTempMarker.setRadius(myRadius);
 		    	markers.add(myTempMarker);
 		    	map.addMarkers(markers);
 		    	
