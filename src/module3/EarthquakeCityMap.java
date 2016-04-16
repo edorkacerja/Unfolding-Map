@@ -10,7 +10,7 @@ import java.util.List;
 
 //Processing library
 import processing.core.PApplet;
-
+import processing.core.PShape;
 //Unfolding libraries
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.marker.Marker;
@@ -85,6 +85,8 @@ public class EarthquakeCityMap extends PApplet {
 		    	float mag = Float.parseFloat(magObj.toString());
 		    	// PointFeatures also have a getLocation method
 		    	
+		    	
+		    	//setting different design for the markers according to the magnitude of the earthquake.
 		    	int myColor;
 		    	int myRadius;
 		    	
@@ -145,6 +147,29 @@ public class EarthquakeCityMap extends PApplet {
 	private void addKey() 
 	{	
 
+		
+		//legend rectangle
+		fill(color(255,255,200));
+		rect(30, 50, 120, 250);
+		
+		
+		
+		
+		//text fields for the legend
+		textSize(10);
+		fill(color(0,0,0));
+		text("5.0+ Magnitude", 60, 130); 
+		text("4.0+ Magnitude", 60, 180);
+		text("Below 4.0  Magnitude", 60, 230);
+
+		
+		//the circles for each magnitude;
+		fill(color(0,0,255));
+		ellipse(40, 130, 5, 5);
+		fill(color(255,255,0));
+		ellipse(40, 180, 8, 8);
+		fill(color(255,0,0));
+		ellipse(40, 230, 12, 12);
 		
 		// Remember you can use Processing's graphics methods here
 	
