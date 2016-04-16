@@ -1,7 +1,9 @@
 package module3;
 
+import java.awt.Color;
 //Java utilities libraries
 import java.util.ArrayList;
+import java.util.HashMap;
 //import java.util.Collections;
 //import java.util.Comparator;
 import java.util.List;
@@ -51,7 +53,7 @@ public class EarthquakeCityMap extends PApplet {
 
 		
 		
-			map = new UnfoldingMap(this, 200, 50, 700, 500, new Google.GoogleMapProvider());
+		map = new UnfoldingMap(this, 200, 50, 700, 500, new Google.GoogleMapProvider());
 
                         
 		
@@ -77,13 +79,28 @@ public class EarthquakeCityMap extends PApplet {
 	    	for(PointFeature earthquake : earthquakes){
 
 		    	System.out.println(earthquake.getLocation());
-		    	System.out.println(earthquake.getProperties());
 		    	
 		    	
 		    	Object magObj = earthquake.getProperty("magnitude");
 		    	float mag = Float.parseFloat(magObj.toString());
 		    	// PointFeatures also have a getLocation method
-		    	markers.add(createMarker(earthquake));
+		    	
+		    	int myColor = color(100,200,100);
+		    	
+		    	if(mag < 4.0){
+		    		myColor = color(0,0,255);
+		    	}else if(mag < 5.0){
+		    		myColor = color(255, 255, 0);
+		    	}else {
+		    		myColor = color(255,0,0);
+		    	}
+		    	
+		    	
+		    	
+		    	
+		    	SimplePointMarker myTempMarker = createMarker(earthquake);
+		    	myTempMarker.setColor(myColor);
+		    	markers.add(myTempMarker);
 		    	map.addMarkers(markers);
 		    	
 	    	}
@@ -104,6 +121,7 @@ public class EarthquakeCityMap extends PApplet {
 	// TODO: Implement this method and call it from setUp, if it helps
 	private SimplePointMarker createMarker(PointFeature feature)
 	{
+		System.out.println(feature.getProperty("magnitude"));
 		
 		// finish implementing and use this method, if it helps.
 		return new SimplePointMarker(feature.getLocation());
