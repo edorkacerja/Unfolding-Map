@@ -73,6 +73,7 @@ public class EarthquakeCityMap extends PApplet {
 	    // in the features, and (2) how to get one property and use it
 	    
 	    if (earthquakes.size() > 0) {
+	    	
 	    	for(PointFeature earthquake : earthquakes){
 
 		    	System.out.println(earthquake.getLocation());
@@ -82,8 +83,9 @@ public class EarthquakeCityMap extends PApplet {
 		    	Object magObj = earthquake.getProperty("magnitude");
 		    	float mag = Float.parseFloat(magObj.toString());
 		    	// PointFeatures also have a getLocation method
+		    	markers.add(createMarker(earthquake));
+		    	map.addMarkers(markers);
 		    	
-		    	map.addMarker(createMarker(earthquake));
 	    	}
 	    	
 	    	
