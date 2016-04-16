@@ -26,8 +26,7 @@ public class HelloWorld extends PApplet
 	/** This is where to find the local tiles, for working without an Internet connection */
 	public static String mbTilesString = "blankLight-1-3.mbtiles";
 	
-	// IF YOU ARE WORKING OFFLINE: Change the value of this variable to true
-	private static final boolean offline = false;
+	
 	
 	/** The map we use to display our home town: La Jolla, CA */
 	UnfoldingMap map1;
@@ -50,13 +49,7 @@ public class HelloWorld extends PApplet
 		// Set a zoom level
 		int zoomLevel = 10;
 		
-		if (offline) {
-			// If you are working offline, you need to use this provider 
-			// to work with the maps that are local on your computer.  
-			provider = new MBTilesMapProvider(mbTilesString);
-			// 3 is the maximum zoom level for working offline
-			zoomLevel = 3;
-		}
+		
 		
 		// Create a new UnfoldingMap to be displayed in this window.  
 		// The 2nd-5th arguments give the map's x, y, width and height
