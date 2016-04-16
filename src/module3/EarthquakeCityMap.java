@@ -164,12 +164,13 @@ public class EarthquakeCityMap extends PApplet {
 
 		
 		//the circles for each magnitude;
-		fill(color(0,0,255));
-		ellipse(40, 130, 5, 5);
+		fill(color(255,0,0));
+		ellipse(40, 130, 12, 12);
 		fill(color(255,255,0));
 		ellipse(40, 180, 8, 8);
-		fill(color(255,0,0));
-		ellipse(40, 230, 12, 12);
+		fill(color(0,0,255));
+		ellipse(40, 230, 5, 5);
+
 		
 		// Remember you can use Processing's graphics methods here
 	
