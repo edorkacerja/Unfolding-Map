@@ -34,7 +34,7 @@ public class EarthquakeCityMap extends PApplet {
 	// You can ignore this.  It's to get rid of eclipse warnings
 	private static final long serialVersionUID = 1L;
 
-		
+
 	
 
 	//feed with magnitude 2.5+ Earthquakes
@@ -47,15 +47,18 @@ public class EarthquakeCityMap extends PApplet {
 	// The map
 	private UnfoldingMap map;
 	
+	
+	
 	// Markers for each city
 	private List<Marker> cityMarkers;
 	// Markers for each earthquake
 	private List<Marker> quakeMarkers;
-
 	// A List of country markers
 	private List<Marker> countryMarkers;
 	
-	public void setup() {		
+	
+	
+	public void setup() {
 		// (1) Initializing canvas and map tiles
 		size(900, 700, OPENGL);
 		
