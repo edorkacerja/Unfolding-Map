@@ -88,7 +88,7 @@ public class EarthquakeCityMap extends PApplet {
 		for(Feature city : cities) {
 		  cityMarkers.add(new CityMarker(city));
 		}
-	    
+	    	
 		//     STEP 3: read in earthquake RSS feed
 	    List<PointFeature> earthquakes = ParseFeed.parseEarthquake(this, earthquakesURL);
 	    quakeMarkers = new ArrayList<Marker>();
@@ -157,8 +157,13 @@ public class EarthquakeCityMap extends PApplet {
 	private boolean isLand(PointFeature earthquake) {
 		
 		// IMPLEMENT THIS: loop over all countries to check if location is in any of them
-		
 		// TODO: Implement this method using the helper method isInCountry
+		
+		for(Marker country : countryMarkers){
+			if(isInCountry(earthquake, country)){
+				return true;
+			}
+		}
 		
 		// not inside any country
 		return false;
@@ -170,8 +175,18 @@ public class EarthquakeCityMap extends PApplet {
 	// the quakes to count how many occurred in that country.
 	// Recall that the country markers have a "name" property, 
 	// And LandQuakeMarkers have a "country" property set.
-	private void printQuakes() 
-	{
+	private void printQuakes() 	{
+		
+		for(Marker countryMarker : countryMarkers){
+			int numberOfQuakes = 0;
+			for(Marker quakeMarker : quakeMarkers){
+				if(countryMarker.getProperty("name") == quakeMarker.getProperty("country")){
+					numberOfQuakes++;
+					System.out.println("MAAAAATCH"+numberOfQuakes);
+				}
+			}
+			
+		}
 		// TODO: Implement this method
 	}
 	
