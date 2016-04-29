@@ -71,8 +71,8 @@ public class EarthquakeCityMap extends PApplet {
 		
 		// FOR TESTING: Set earthquakesURL to be one of the testing files by uncommenting
 		// one of the lines below.  This will work whether you are online or offline
-		earthquakesURL = "test1.atom";
-		//earthquakesURL = "test2.atom";
+//		earthquakesURL = "test1.atom";
+		earthquakesURL = "test2.atom";
 		
 		// WHEN TAKING THIS QUIZ: Uncomment the next line
 		//earthquakesURL = "quiz1.atom";
@@ -199,7 +199,6 @@ public class EarthquakeCityMap extends PApplet {
 		}
 		System.out.println("Ocean Quakes =     " + numberOfOceanQuakes);
 
-		// TODO: Implement this method
 	}
 	
 	
