@@ -182,10 +182,11 @@ public class EarthquakeCityMap extends PApplet {
 			for(Marker quakeMarker : quakeMarkers){
 				if(countryMarker.getProperty("name") == quakeMarker.getProperty("country")){
 					numberOfQuakes++;
-					System.out.println("MAAAAATCH"+numberOfQuakes);
 				}
 			}
-			
+			if(numberOfQuakes>0){
+				System.out.println("In "+ countryMarker.getProperty("name") + numberOfQuakes + "earthquakes have occurred ");
+			}
 		}
 		// TODO: Implement this method
 	}
