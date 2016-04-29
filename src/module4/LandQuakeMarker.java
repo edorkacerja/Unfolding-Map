@@ -28,6 +28,11 @@ public class LandQuakeMarker extends EarthquakeMarker {
 		// DO NOT set the fill color here.  That will be set in the EarthquakeMarker
 		// class to indicate the depth of the earthquake.
 		// Simply draw a centered circle.
+		
+		if(when == "Past Hour"){
+			System.out.println("Past hour!!!");
+		}
+		
 		if(radius < THRESHOLD_MODERATE*2){
 			pg.ellipse(x, y, 5, 5);
 		}else if(radius >= THRESHOLD_MODERATE*2){

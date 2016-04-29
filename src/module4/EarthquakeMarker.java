@@ -22,6 +22,7 @@ public abstract class EarthquakeMarker extends SimplePointMarker
 	// based on magnitude. 
 	protected float radius;
 	protected float depth;
+	protected String when;
 	
 	
 	/** Greater than or equal to this threshold is a moderate earthquake */
@@ -52,6 +53,7 @@ public abstract class EarthquakeMarker extends SimplePointMarker
 		setProperties(properties);
 		this.radius = 1.75f*getMagnitude();
 		this.depth = Float.parseFloat(properties.get("depth").toString());
+		this.when = properties.get("age").toString();
 	}
 	
 
