@@ -26,6 +26,12 @@ public class OceanQuakeMarker extends EarthquakeMarker {
 		// class to indicate the depth of the earthquake.
 		// Simply draw a centered square.
 		
+		if(radius < THRESHOLD_MODERATE*2 ){
+			pg.rect(x, y, 5, 5);
+		}else if(radius >= THRESHOLD_MODERATE*2){
+			pg.rect(x, y, 10, 10);
+		}
+		
 		// HINT: Notice the radius variable in the EarthquakeMarker class
 		// and how it is set in the EarthquakeMarker constructor
 		
