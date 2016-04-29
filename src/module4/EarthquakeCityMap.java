@@ -57,6 +57,7 @@ public class EarthquakeCityMap extends PApplet {
 	private List<Marker> countryMarkers;
 	
 	
+	List<PointFeature> earthquakes;
 	
 	public void setup() {
 		// (1) Initializing canvas and map tiles
@@ -70,7 +71,7 @@ public class EarthquakeCityMap extends PApplet {
 		
 		// FOR TESTING: Set earthquakesURL to be one of the testing files by uncommenting
 		// one of the lines below.  This will work whether you are online or offline
-		//earthquakesURL = "test1.atom";
+		earthquakesURL = "test1.atom";
 		//earthquakesURL = "test2.atom";
 		
 		// WHEN TAKING THIS QUIZ: Uncomment the next line
@@ -90,7 +91,7 @@ public class EarthquakeCityMap extends PApplet {
 		}
 	    	
 		//     STEP 3: read in earthquake RSS feed
-	    List<PointFeature> earthquakes = ParseFeed.parseEarthquake(this, earthquakesURL);
+	    earthquakes = ParseFeed.parseEarthquake(this, earthquakesURL);
 	    quakeMarkers = new ArrayList<Marker>();
 	    
 	    for(PointFeature feature : earthquakes) {
@@ -176,18 +177,28 @@ public class EarthquakeCityMap extends PApplet {
 	// Recall that the country markers have a "name" property, 
 	// And LandQuakeMarkers have a "country" property set.
 	private void printQuakes() 	{
+		int numberOfOceanQuakes = 0;
+		
+		for(PointFeature earthquake : earthquakes){
+			if(!isLand(earthquake)){
+				numberOfOceanQuakes++;
+			}
+		}
+		
 		
 		for(Marker countryMarker : countryMarkers){
 			int numberOfQuakes = 0;
-			for(Marker quakeMarker : quakeMarkers){
-				if(countryMarker.getProperty("name") == quakeMarker.getProperty("country")){
+			for(PointFeature earthquake : earthquakes){
+				if(countryMarker.getProperty("name") == earthquake.getProperty("country")){
 					numberOfQuakes++;
 				}
 			}
 			if(numberOfQuakes>0){
-				System.out.println("In "+ countryMarker.getProperty("name") + numberOfQuakes + "earthquakes have occurred ");
+				System.out.println("In "+ countryMarker.getProperty("name") +"  ---- " + numberOfQuakes + "earthquakes have occurred ");
 			}
 		}
+		System.out.println("Ocean Quakes =     " + numberOfOceanQuakes);
+
 		// TODO: Implement this method
 	}
 	
