@@ -20,11 +20,11 @@ import processing.core.PApplet;
 /** EarthquakeCityMap
  * An application with an interactive map displaying earthquake data.
  * Author: UC San Diego Intermediate Software Development MOOC team
- * @author Your name here
+ * @author Edor Kacerja
  * Date: July 17, 2015
  * */
 public class EarthquakeCityMap extends PApplet {
-	
+
 	// We will use member variables, instead of local variables, to store the data
 	// that the setup and draw methods will need to access (as well as other methods)
 	// You will use many of these variables, but the only one you should need to add
@@ -33,13 +33,7 @@ public class EarthquakeCityMap extends PApplet {
 	
 	// You can ignore this.  It's to get rid of eclipse warnings
 	private static final long serialVersionUID = 1L;
-
-	// IF YOU ARE WORKING OFFILINE, change the value of this variable to true
-	private static final boolean offline = false;
-	
-	/** This is where to find the local tiles, for working without an Internet connection */
-	public static String mbTilesString = "blankLight-1-3.mbtiles";
-	
+		
 	//feed with magnitude 2.5+ Earthquakes
 	private String earthquakesURL = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom";
 	
@@ -65,15 +59,11 @@ public class EarthquakeCityMap extends PApplet {
 	public void setup() {		
 		// (1) Initializing canvas and map tiles
 		size(900, 700, OPENGL);
-		if (offline) {
-		    map = new UnfoldingMap(this, 200, 50, 650, 600, new MBTilesMapProvider(mbTilesString));
-		    earthquakesURL = "2.5_week.atom";  // The same feed, but saved August 7, 2015
-		}
-		else {
-			map = new UnfoldingMap(this, 200, 50, 650, 600, new Google.GoogleMapProvider());
-			// IF YOU WANT TO TEST WITH A LOCAL FILE, uncomment the next line
-		    //earthquakesURL = "2.5_week.atom";
-		}
+		 
+		map = new UnfoldingMap(this, 200, 50, 650, 600, new Google.GoogleMapProvider());
+		// IF YOU WANT TO TEST WITH A LOCAL FILE, uncomment the next line
+	    //earthquakesURL = "2.5_week.atom";
+		
 		MapUtils.createDefaultEventDispatcher(this, map);
 		
 		
@@ -81,7 +71,7 @@ public class EarthquakeCityMap extends PApplet {
 	    //     STEP 1: load country features and markers
 		List<Feature> countries = GeoJSONReader.loadData(this, countryFile);
 		countryMarkers = MapUtils.createSimpleMarkers(countries);
-		
+
 		//     STEP 2: read in city data
 		List<Feature> cities = GeoJSONReader.loadData(this, cityFile);
 		cityMarkers = new ArrayList<Marker>();
@@ -138,13 +128,20 @@ public class EarthquakeCityMap extends PApplet {
 		selectMarkerIfHover(quakeMarkers);
 		selectMarkerIfHover(cityMarkers);
 	}
-	
+
 	// If there is a marker under the cursor, and lastSelected is null 
 	// set the lastSelected to be the first marker found under the cursor
 	// Make sure you do not select two markers.
 	// 
 	private void selectMarkerIfHover(List<Marker> markers)
 	{
+		for (Marker marker: markers){
+			if(marker.isInside(map, mouseX, mouseY)){
+				lastSelected = (CommonMarker)marker;
+				System.out.println(lastSelected);
+				break;
+			}
+		}
 		// TODO: Implement this method
 	}
 	

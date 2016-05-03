@@ -28,7 +28,7 @@ public class LandQuakeMarker extends EarthquakeMarker {
 		pg.ellipse(x, y, 2*radius, 2*radius);
 		
 	}
-	
+
 
 	// Get the country the earthquake is in
 	public String getCountry() {
