@@ -139,7 +139,7 @@ public class EarthquakeCityMap extends PApplet {
 			if(marker.isInside(map, mouseX, mouseY) && lastSelected==null){
 				marker.setSelected(true);
 				lastSelected = (CommonMarker) marker;
-//				break;
+				break;
 			}
 		}
 	}
@@ -153,24 +153,35 @@ public class EarthquakeCityMap extends PApplet {
 	public void mouseClicked()
 	{
 		if(lastClicked != null){
-			lastClicked.setSelected(false);
+			resetVisibilityToAllMarkers(quakeMarkers);
+			resetVisibilityToAllMarkers(cityMarkers);
 			lastClicked = null;
-		}
+		}else{
 
+		
 		selectMarkerIfClicked(quakeMarkers);
 		selectMarkerIfClicked(cityMarkers);
+		}
 		// TODO: Implement this method
 		// Hint: You probably want a helper method or two to keep this code
 		// from getting too long/disorganized
 	}
-	
+
 	private void selectMarkerIfClicked(List<Marker> markers){
 		for (Marker marker : markers){
 			if(marker.isInside(map, mouseX, mouseY)){
-				marker.setSelected(true);
 				lastClicked = (CommonMarker) marker;
-				break;
+				lastClicked.setHidden(false);
+				
+			}else{
+				marker.setHidden(true);
 			}
+		}
+	}
+	
+	private void resetVisibilityToAllMarkers(List<Marker> markers){
+		for(Marker marker : markers){
+			marker.setHidden(false);
 		}
 	}
 	
