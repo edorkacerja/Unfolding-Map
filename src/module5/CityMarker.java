@@ -17,6 +17,9 @@ import processing.core.PGraphics;
 public class CityMarker extends CommonMarker {
 	
 	public static int TRI_SIZE = 5;  // The size of the triangle marker
+	private String CityMarkerName;
+	private String CityCountryName;
+	private String CityPopulation;
 	
 	public CityMarker(Location location) {
 		super(location);
@@ -25,8 +28,13 @@ public class CityMarker extends CommonMarker {
 	
 	public CityMarker(Feature city) {
 		super(((PointFeature)city).getLocation(), city.getProperties());
+		
+		
 		// Cities have properties: "name" (city name), "country" (country name)
 		// and "population" (population, in millions)
+		CityMarkerName = (String) city.getProperty("name");
+		CityCountryName = (String) city.getProperty("country");
+		CityPopulation = (String) city.getProperty("population");
 	}
 
 	
@@ -36,6 +44,7 @@ public class CityMarker extends CommonMarker {
 	public void draw(PGraphics pg, float x, float y) {
 		// Save previous drawing style
 		pg.pushStyle();
+		
 		
 		// IMPLEMENT: drawing triangle for each city
 		pg.fill(150, 30, 30);
@@ -48,8 +57,8 @@ public class CityMarker extends CommonMarker {
 	/** Show the title of the city if this marker is selected */
 	public void showTitle(PGraphics pg, float x, float y)
 	{
+		pg.text("edor", x, y);
 		
-		// TODO: Implement this method
 	}
 	
 	

@@ -20,6 +20,7 @@ public abstract class EarthquakeMarker extends CommonMarker
 	// using the thresholds below, or a continuous function
 	// based on magnitude. 
 	protected float radius;
+	protected String earthquakeTitle;
 	
 	
 	// constants for distance
@@ -46,20 +47,29 @@ public abstract class EarthquakeMarker extends CommonMarker
 	public EarthquakeMarker (PointFeature feature) 
 	{
 		super(feature.getLocation());
+		
 		// Add a radius property and then set the properties
 		java.util.HashMap<String, Object> properties = feature.getProperties();
 		float magnitude = Float.parseFloat(properties.get("magnitude").toString());
+		earthquakeTitle = (String) feature.getProperty("title");
+		
 		properties.put("radius", 2*magnitude );
 		setProperties(properties);
 		this.radius = 1.75f*getMagnitude();
 	}
-	
+
 
 	// calls abstract method drawEarthquake and then checks age and draws X if needed
 	@Override
 	public void drawMarker(PGraphics pg, float x, float y) {
 		// save previous styling
 		pg.pushStyle();
+		
+		
+		//title of each earthquake
+//		pg.text(earthquakeTitle, x, y);
+//		System.out.println(earthquakeTitle);
+		
 			
 		// determine color of marker from depth
 		colorDetermine(pg);
@@ -93,9 +103,11 @@ public abstract class EarthquakeMarker extends CommonMarker
 	@Override
 	public void showTitle(PGraphics pg, float x, float y)
 	{
-		// TODO: Implement this method
-		
+		pg.text(earthquakeTitle, x, y);
+			
 	}
+	
+	
 
 	
 	/**

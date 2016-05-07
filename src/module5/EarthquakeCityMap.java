@@ -56,7 +56,7 @@ public class EarthquakeCityMap extends PApplet {
 	private CommonMarker lastSelected;
 	private CommonMarker lastClicked;
 	
-	public void setup() {		
+	public void setup() {
 		// (1) Initializing canvas and map tiles
 		size(900, 700, OPENGL);
 		 
@@ -123,7 +123,7 @@ public class EarthquakeCityMap extends PApplet {
 		if (lastSelected != null) {
 			lastSelected.setSelected(false);
 			lastSelected = null;
-		
+
 		}
 		selectMarkerIfHover(quakeMarkers);
 		selectMarkerIfHover(cityMarkers);
@@ -136,15 +136,14 @@ public class EarthquakeCityMap extends PApplet {
 	private void selectMarkerIfHover(List<Marker> markers)
 	{
 		for (Marker marker: markers){
-			if(marker.isInside(map, mouseX, mouseY)){
-				lastSelected = (CommonMarker)marker;
-				System.out.println(lastSelected);
-				break;
+			if(marker.isInside(map, mouseX, mouseY) && lastSelected==null){
+				marker.setSelected(true);
+				lastSelected = (CommonMarker) marker;
+//				break;
 			}
 		}
-		// TODO: Implement this method
 	}
-	
+
 	/** The event handler for mouse clicks
 	 * It will display an earthquake and its threat circle of cities
 	 * Or if a city is clicked, it will display all the earthquakes 
@@ -153,9 +152,26 @@ public class EarthquakeCityMap extends PApplet {
 	@Override
 	public void mouseClicked()
 	{
+		if(lastClicked != null){
+			lastClicked.setSelected(false);
+			lastClicked = null;
+		}
+
+		selectMarkerIfClicked(quakeMarkers);
+		selectMarkerIfClicked(cityMarkers);
 		// TODO: Implement this method
 		// Hint: You probably want a helper method or two to keep this code
 		// from getting too long/disorganized
+	}
+	
+	private void selectMarkerIfClicked(List<Marker> markers){
+		for (Marker marker : markers){
+			if(marker.isInside(map, mouseX, mouseY)){
+				marker.setSelected(true);
+				lastClicked = (CommonMarker) marker;
+				break;
+			}
+		}
 	}
 	
 	
