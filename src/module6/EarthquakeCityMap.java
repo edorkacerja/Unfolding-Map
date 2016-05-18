@@ -2,6 +2,7 @@ package module6;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
@@ -21,7 +22,7 @@ import processing.core.PApplet;
 /** EarthquakeCityMap
  * An application with an interactive map displaying earthquake data.
  * Author: UC San Diego Intermediate Software Development MOOC team
- * @author Your name here
+ * @author Edor Kacerja
  * Date: July 17, 2015
  * */
 public class EarthquakeCityMap extends PApplet {
@@ -35,8 +36,6 @@ public class EarthquakeCityMap extends PApplet {
 	// You can ignore this.  It's to get rid of eclipse warnings
 	private static final long serialVersionUID = 1L;
 
-	// IF YOU ARE WORKING OFFILINE, change the value of this variable to true
-	private static final boolean offline = false;
 	
 	/** This is where to find the local tiles, for working without an Internet connection */
 	public static String mbTilesString = "blankLight-1-3.mbtiles";
@@ -68,21 +67,17 @@ public class EarthquakeCityMap extends PApplet {
 	public void setup() {		
 		// (1) Initializing canvas and map tiles
 		size(900, 700, OPENGL);
-		if (offline) {
-		    map = new UnfoldingMap(this, 200, 50, 650, 600, new MBTilesMapProvider(mbTilesString));
-		    earthquakesURL = "2.5_week.atom";  // The same feed, but saved August 7, 2015
-		}
-		else {
-			map = new UnfoldingMap(this, 200, 50, 650, 600, new Google.GoogleMapProvider());
-			// IF YOU WANT TO TEST WITH A LOCAL FILE, uncomment the next line
-		    //earthquakesURL = "2.5_week.atom";
-		}
+		
+		map = new UnfoldingMap(this, 200, 50, 650, 600, new Google.GoogleMapProvider());
+		// IF YOU WANT TO TEST WITH A LOCAL FILE, uncomment the next line
+	    //earthquakesURL = "2.5_week.atom";
+		
 		MapUtils.createDefaultEventDispatcher(this, map);
 		
 		// FOR TESTING: Set earthquakesURL to be one of the testing files by uncommenting
 		// one of the lines below.  This will work whether you are online or offline
 		//earthquakesURL = "test1.atom";
-		//earthquakesURL = "test2.atom";
+		earthquakesURL = "test2.atom";
 		
 		// Uncomment this line to take the quiz
 		//earthquakesURL = "quiz2.atom";
@@ -124,6 +119,11 @@ public class EarthquakeCityMap extends PApplet {
 	    map.addMarkers(quakeMarkers);
 	    map.addMarkers(cityMarkers);
 	    
+	    try{
+	    	sortAndPrint(5);
+	    }catch(ArrayIndexOutOfBoundsException e){
+	    	System.out.println(e.getMessage());
+	    }
 	    
 	}  // End setup
 	
@@ -137,7 +137,15 @@ public class EarthquakeCityMap extends PApplet {
 	
 	
 	// TODO: Add the method:
-	//   private void sortAndPrint(int numToPrint)
+	   private void sortAndPrint(int numToPrint){
+		   Object[] myArray = quakeMarkers.toArray();
+		   Arrays.sort(myArray, Collections.reverseOrder());
+		   System.out.println("----");
+		   for(int i=0; i<numToPrint; i++){
+			   System.out.println(myArray[i]);
+		   }
+	   }
+	   
 	// and then call that method from setUp
 	
 	/** Event handler that gets called automatically when the 

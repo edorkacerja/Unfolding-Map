@@ -158,7 +158,7 @@ public class EarthquakeCityMap extends PApplet {
 			lastClicked = null;
 		}else{
 
-		
+
 		selectMarkerIfClicked(quakeMarkers);
 		selectMarkerIfClicked(cityMarkers);
 		}
